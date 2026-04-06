@@ -5,6 +5,8 @@ import Loader from '@/components/Loader';
 import ErrorState from '@/components/ErrorState';
 import { Activity, LayoutGrid, Table as TableIcon, Search } from 'lucide-react';
 import { useSeo } from '@/hooks/use-seo';
+import HighPerformanceAd from '@/components/ads/HighPerformanceAd';
+import PopunderAd from '@/components/ads/PopunderAd';
 
 const LiveScore = () => {
   const [matches, setMatches] = useState<MatchInfo[]>([]);
@@ -62,6 +64,7 @@ const LiveScore = () => {
 
   return (
     <div>
+      <PopunderAd />
       <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex items-center gap-2">
           <Activity className="h-5 w-5 text-primary" />
@@ -123,6 +126,10 @@ const LiveScore = () => {
             </button>
           </div>
         </div>
+      </div>
+
+      <div className="mb-6 flex justify-center">
+        <HighPerformanceAd className="rounded-xl " />
       </div>
 
       {filteredMatches.length === 0 ? (

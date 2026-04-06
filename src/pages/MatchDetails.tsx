@@ -142,10 +142,30 @@ const MatchDetails = () => {
   if (loading) return <Loader text="Loading match details..." />;
   if (error || !match) return <ErrorState message={error || 'Match not found'} />;
 
+  const team1 = match.teamInfo?.[0];
+  const team2 = match.teamInfo?.[1];
+
   return (
     <div>
       <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
         <div>
+          <div className="mb-2 flex items-center gap-2">
+            {team1?.img ? (
+              <img src={team1.img} alt={team1.name} className="h-7 w-7 rounded-full object-cover" />
+            ) : (
+              <div className="flex h-7 w-7 items-center justify-center rounded-full bg-secondary text-[10px] font-bold text-secondary-foreground">
+                {(team1?.shortname || match.teams?.[0] || 'T1').slice(0, 2).toUpperCase()}
+              </div>
+            )}
+            <span className="text-xs text-muted-foreground">vs</span>
+            {team2?.img ? (
+              <img src={team2.img} alt={team2.name} className="h-7 w-7 rounded-full object-cover" />
+            ) : (
+              <div className="flex h-7 w-7 items-center justify-center rounded-full bg-secondary text-[10px] font-bold text-secondary-foreground">
+                {(team2?.shortname || match.teams?.[1] || 'T2').slice(0, 2).toUpperCase()}
+              </div>
+            )}
+          </div>
           <h1 className="text-xl font-bold text-foreground">{match.teams.join(' vs ')}</h1>
           <p className="text-sm text-muted-foreground">{seriesName || match.name}</p>
           <p className="text-xs text-muted-foreground">{match.venue}</p>

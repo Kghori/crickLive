@@ -1,4 +1,6 @@
 import type { MatchScorecard } from '@/services/cricketApi';
+import HighPerformanceAd from '@/components/ads/HighPerformanceAd';
+import PopunderAd from '@/components/ads/PopunderAd';
 
 interface ScorecardTabProps {
   data: MatchScorecard[];
@@ -11,6 +13,11 @@ const ScorecardTab = ({ data }: ScorecardTabProps) => {
 
   return (
     <div className="space-y-4">
+      <PopunderAd />
+      <div className="flex justify-center">
+        <HighPerformanceAd className="rounded-xl " />
+      </div>
+
       {data.map(inning => (
         <div key={inning.inningsId} className="rounded-lg border bg-card p-3">
           <h3 className="mb-3 text-sm font-semibold text-foreground">Innings {inning.inningsId}</h3>

@@ -1,4 +1,6 @@
 import type { NewsItem } from '@/services/cricketApi';
+import HighPerformanceAd from '@/components/ads/HighPerformanceAd';
+import PopunderAd from '@/components/ads/PopunderAd';
 
 interface NewsTabProps {
   data: NewsItem[];
@@ -9,6 +11,10 @@ const NewsTab = ({ data }: NewsTabProps) => {
 
   return (
     <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <PopunderAd />
+      <div className="sm:col-span-2 lg:col-span-3 flex justify-center">
+        <HighPerformanceAd className="rounded-xl  w-full" />
+      </div>
       {data.map(item => (
         <article key={item.id} className="rounded-lg border bg-card p-4">
           <h3 className="text-sm min-h-10 font-semibold text-foreground">{item.title}</h3>
