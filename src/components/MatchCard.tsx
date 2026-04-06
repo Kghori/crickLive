@@ -8,7 +8,7 @@ interface MatchCardProps {
 }
 
 const adLinks = [
-  'https://ad1.com',
+  'https://www.profitablecpmratenetwork.com/um9bwb10?key=63afd70cc28620fb8681270e825cfbb8',
   'https://ad2.com',
   'https://ad3.com',
 ];
