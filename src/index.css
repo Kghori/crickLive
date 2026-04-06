@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 160 15% 6%;
+    --foreground: 0 0% 95%;
+
+    --card: 160 12% 10%;
+    --card-foreground: 0 0% 95%;
+
+    --popover: 160 12% 10%;
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 152 60% 42%;
+    --primary-foreground: 160 15% 6%;
+
+    --secondary: 160 10% 16%;
+    --secondary-foreground: 0 0% 90%;
+
+    --muted: 160 8% 14%;
+    --muted-foreground: 160 5% 55%;
+
+    --accent: 38 90% 55%;
+    --accent-foreground: 160 15% 6%;
+
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 160 10% 18%;
+    --input: 160 10% 18%;
+    --ring: 152 60% 42%;
+
+    --radius: 0.75rem;
+
+    --cricket-live: 0 85% 55%;
+    --cricket-upcoming: 210 70% 55%;
+    --cricket-win: 152 60% 42%;
+    --cricket-loss: 0 70% 50%;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', sans-serif;
+  }
+}
+
+@layer utilities {
+  .live-pulse {
+    animation: livePulse 2s ease-in-out infinite;
+  }
+  @keyframes livePulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+}
