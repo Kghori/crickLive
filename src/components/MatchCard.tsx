@@ -1,20 +1,14 @@
 import { memo } from 'react';
-import { useNavigate } from 'react-router-dom';
 import type { MatchInfo } from '@/services/cricketApi';
+import { useAdPopup } from '@/components/AdPopupProvider';
 
 interface MatchCardProps {
   match: MatchInfo;
   variant?: 'live' | 'upcoming';
 }
 
-const adLinks = [
-  'https://www.profitablecpmratenetwork.com/um9bwb10?key=63afd70cc28620fb8681270e825cfbb8',
-  'https://ad2.com',
-  'https://ad3.com',
-];
-
 const MatchCard = memo(({ match, variant = 'live' }: MatchCardProps) => {
-  const navigate = useNavigate();
+  const { showAd } = useAdPopup();
   const isLive = variant === 'live';
   const team1 = match.teamInfo?.[0];
   const team2 = match.teamInfo?.[1];
@@ -22,26 +16,7 @@ const MatchCard = memo(({ match, variant = 'live' }: MatchCardProps) => {
   const score2 = match.score?.find(s => s.inning?.includes(match.teams?.[1]));
 
   const handleOpenMatch = () => {
-    const targetPath = `/match/${match.id}`;
-    const randomAd = adLinks[Math.floor(Math.random() * adLinks.length)];
-
-    if (!randomAd) {
-      navigate(targetPath);
-      return;
-    }
-
-    const adWindow = window.open(randomAd, '_blank', 'noopener,noreferrer');
-    if (!adWindow) {
-      navigate(targetPath);
-      return;
-    }
-
-    const poll = window.setInterval(() => {
-      if (adWindow.closed) {
-        window.clearInterval(poll);
-        navigate(targetPath);
-      }
-    }, 500);
+    showAd({ onCloseNavigateTo: `/match/${match.id}` });
   };
 
   return (

@@ -3,7 +3,7 @@
 interface ImportMetaEnv {
   readonly VITE_RAPIDAPI_HOST?: string;
   readonly VITE_RAPIDAPI_KEY?: string;
-  readonly VITE_ADSTRA_AD_URL?: string;
+  readonly VITE_AD_LINKS?: string;
 }
 
 interface ImportMeta {
