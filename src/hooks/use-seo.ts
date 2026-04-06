@@ -5,6 +5,7 @@ interface SeoOptions {
   description: string;
   image?: string;
   canonicalPath?: string;
+  noIndex?: boolean;
 }
 
 function ensureMetaByName(name: string) {
@@ -42,18 +43,25 @@ export function useSeo({ title, description, image, canonicalPath }: SeoOptions)
     document.title = title;
 
     ensureMetaByName('description').setAttribute('content', description);
+    ensureMetaByName('robots').setAttribute('content', 'index,follow');
     ensureMetaByProperty('og:title').setAttribute('content', title);
     ensureMetaByProperty('og:description').setAttribute('content', description);
+    ensureMetaByProperty('og:type').setAttribute('content', 'website');
     ensureMetaByName('twitter:title').setAttribute('content', title);
     ensureMetaByName('twitter:description').setAttribute('content', description);
+    ensureMetaByName('twitter:card').setAttribute('content', 'summary_large_image');
 
-    const imageUrl = image || 'https://lovable.dev/opengraph-image-p98pqg.png';
+    const toAbsoluteUrl = (maybeRelative: string) => {
+      if (maybeRelative.startsWith('http://') || maybeRelative.startsWith('https://')) return maybeRelative;
+      return `${window.location.origin}${maybeRelative.startsWith('/') ? '' : '/'}${maybeRelative}`;
+    };
+
+    const imageUrl = toAbsoluteUrl(image || '/crick.png');
     ensureMetaByProperty('og:image').setAttribute('content', imageUrl);
     ensureMetaByName('twitter:image').setAttribute('content', imageUrl);
 
     const canonical = ensureCanonical();
-    canonical.href = canonicalPath
-      ? `${window.location.origin}${canonicalPath}`
-      : window.location.href;
+    canonical.href = canonicalPath ? `${window.location.origin}${canonicalPath}` : window.location.href;
+    ensureMetaByProperty('og:url').setAttribute('content', canonical.href);
   }, [title, description, image, canonicalPath]);
 }
